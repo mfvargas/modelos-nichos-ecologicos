@@ -1,0 +1,423 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Modelado de nichos ecológicos</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+		
+    <style type="text/css">
+        .column {
+            float: left;
+            width: 50%;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>		
+		
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h2>Modelos de nichos ecológicos</h2>
+					<br>
+  					<small>Manuel Vargas (<a href="mailto:mfvargas@gmail.com">mfvargas@gmail.com</a>, <a href="mailto:manuel.vargas_d@ucr.ac.cr">manuel.vargas_d@ucr.ac.cr</a>)</small>
+					<br>
+					<small>Marzo 2023</small>
+				</section>
+				<section id="biodiversidad">
+					<h4>La biodiversidad está distribuida de manera heterogénea en la Tierra</h4>
+					<div style="text-align:left">
+					  <li>Las zonas bajas son más biodiversas que las zonas altas.</li>					
+					  <li>Los bosques tropicales y los arrecifes de coral son muy ricos en biodiversidad, pero en los desiertos o en los polos es muy escasa.</li>
+					  <li>La biodiversidad terrestre tiende a ser más abundante en zonas cercanas al ecuador.</li>
+					  <li>La biodiversidad marina es más abundante en el océano Pacífico occidental.</li>
+					</div>
+				</section>
+				<section id="riqueza-aves">
+				  <h3>Distribución espacial de la biodiversidad</h3>
+				    <figure>
+              <img src="img/mol-riqueza-aves.png" alt="Riqueza de aves en MOL" style="border:none;background:none;box-shadow:none;margin: 0px 0px;">
+              <figcaption><small>Riqueza de especies de aves en el mundo (MOL, 2023) <a href="https://mol.org/patterns/richnessrarity?taxa=birds&indicator=sr">(mapa actualizado)</a></small></figcaption>
+            </figure>
+				</section>				
+				<section id="riqueza-mamiferos">
+				  <h3>Distribución espacial de la biodiversidad</h3>
+				    <figure>
+              <img src="img/mol-riqueza-mamiferos.png" alt="Riqueza de mamíferos en MOL" style="border:none;background:none;box-shadow:none;margin: 0px 0px;">
+              <figcaption><small>Riqueza de especies de mamíferos en el mundo (MOL, 2023) <a href="https://mol.org/patterns/richnessrarity?taxa=mammals&indicator=sr">(mapa actualizado)</a></small></figcaption>
+            </figure>
+				</section>	
+				<section id="riqueza-mariposas">
+				  <h3>Distribución espacial de la biodiversidad</h3>
+				    <figure>
+              <img src="img/mol-riqueza-mariposas.png" alt="Riqueza de mariposas en MOL" style="border:none;background:none;box-shadow:none;margin: 0px 0px;">
+              <figcaption><small>Riqueza de especies de mariposas en el mundo (MOL, 2023) <a href="https://mol.org/patterns/richnessrarity?taxa=butterflies&indicator=sr">(mapa actualizado)</a></small></figcaption>
+            </figure>
+				</section>											
+				<section id="riqueza-coniferas">
+				  <h3>Distribución espacial de la biodiversidad</h3>
+				    <figure>
+              <img src="img/mol-riqueza-coniferas.png" alt="Riqueza de coníferas en MOL" style="border:none;background:none;box-shadow:none;margin: 0px 0px;">
+              <figcaption><small>Riqueza de especies de coníferas en el mundo (MOL, 2023) <a href="https://mol.org/patterns/richnessrarity?taxa=conifers&indicator=sr">(mapa actualizado)</a></small></figcaption>
+            </figure>
+				</section>								
+				<section id="registros-gbif">
+				  <h3>Datos de biodiversidad disponibles</h3>
+				    <figure>
+              <img src="img/gbif-puntos.png" alt="Registros de presencia en GBIF" style="border:none;background:none;box-shadow:none;margin: 0px 0px;">
+              <figcaption><small>Registros de presencia en el mundo (GBIF, 2023) <a href="http://www.gbif.org">(mapa actualizado)</a></small></figcaption>
+            </figure>
+				</section>
+				<section id="registros-aves-costarica-gbif">
+				  <h3>Datos de biodiversidad disponibles</h3>
+				    <figure>
+              <img src="img/gbif-presencias-aves-cr.jpeg" alt="Registros de presencia de aves de Costa Rica en GBIF" style="border:none;background:none;box-shadow:none;margin: 0px 0px;">
+              <figcaption><small>Registros de presencia de aves en Costa Rica (GBIF, 2023) <a href="https://www.gbif.org/occurrence/search?country=CR&has_coordinate=true&taxon_key=212&has_geospatial_issue=false">(datos actuales)</a></small></figcaption>
+            </figure>
+				</section>
+				<section id="limitaciones-datos-biodiversidad">
+					<h3>Limitaciones de los datos de biodiversidad disponibles</h3>
+					<div style="text-align:left">
+					  <li>Con frecuencia, son escasos o incompletos.</li>					
+					  <li>Los que están disponibles tienen sesgos:
+					    <ul>
+					      <li>Espaciales</li>
+					      <li>Taxonómicos</li>
+					      <li>Temporales</li>
+					    </ul>
+					  </li>
+					</div>
+				</section>          				
+				<section id="razones-distribucion-biodiversidad-01">
+				  <h3>Razones para conocer la distribución de la biodiversidad</h3>
+				  <div class="row" >
+				    <div class="column" style="width:50%">
+				      <figure>
+                <img src="img/vaciosGRUAS.jpg" alt="Vacíos de conservación" style="border:none;background:none;box-shadow:none;margin: 0px 0px;">
+                <figcaption><small>Vacíos de conservación<br>Imagen de Sinac</small></figcaption>
+              </figure>
+            </div>
+				    <div class="column" style="width:50%">
+				      <figure>
+                <img src="img/pezleon.jpg" alt="Especies invasivas" style="border:none;background:none;box-shadow:none;margin: 0px 0px;">
+                <figcaption><small>Especies invasivas<br><a href="https://en.wikipedia.org/wiki/Pterois#/media/File:Red_lionfish_near_Gilli_Banta_Island.JPG">Imagen de Alexander Vasenin</a></small></figcaption>
+              </figure>
+            </div>
+          </div>            
+				</section>							
+				<section id="razones-distribucion-biodiversidad-02">
+				  <h3>Razones para conocer la distribución de la biodiversidad</h3>
+				  <div class="row" >
+				    <div class="column" style="width:50%">
+				      <figure>
+                <img src="img/anopheles.jpeg" alt="Vectores de enfermedades" style="border:none;background:none;box-shadow:none;margin: 0px 0px;">
+                <figcaption><small>Vectores de enfermedades<br><a href="https://en.wikipedia.org/wiki/Anopheles#/media/File:Anopheles_stephensi.jpeg">Imagen de Jim Gathany</a></small></figcaption>
+              </figure>
+            </div>
+				    <div class="column" style="width:50%">
+				      <figure>
+                <img src="img/sapodorado.jpg" alt="Impacto del cambio climático" style="border:none;background:none;box-shadow:none;margin: 0px 0px;">
+                <figcaption><small>Impacto del cambio climático<br><a href="https://en.wikipedia.org/wiki/Golden_toad#/media/File:Bufo_periglenes2.jpg">Imagen de FWS</a></small></figcaption>
+              </figure>
+            </div>
+          </div>            
+        </section>                    
+				<section id="modelado-nichos-01">
+					<h3>Modelos de nichos ecológicos</h3>
+					<div style="text-align:left">
+					  <li>Permiten representar el espacio ecológico (ej. temperatura, precipitación, radiación solar) que ocupan las especies.</li>					
+					  <li>A partir de un modelo de nicho se puede estimar la distribución geográfica de una especie.</li>
+					  <li>Utilizan datos que, en la actualidad, son cada vez más accesibles.</li>
+					</div>
+				</section>
+				<section id="modelado-nichos-02">
+				  <h3>Modelos de nichos ecológicos</h3>
+				    <figure>
+              <img src="img/niche-modelling-toyexample.png" alt="Esquema de modelo de nicho ecológico" style="border:none;background:none;box-shadow:none;margin: 0px 0px;">
+              <figcaption><small>Ejemplo de modelo de nicho ecológico<br><a href="https://www.researchgate.net/publication/278030758_Using_environmental_niche_model_to_study_the_distribution_of_Tonkin_snub-nosed_monkey_Rhinopithecus_avunculus_in_the_Northeastern_Vietnam_under_some_climate_change_scenarios/figures?lo=1">Imagen de Pham Thanh Van</a></small></figcaption>
+            </figure>
+				</section>					          
+				<section id="historia-nichos-01">
+				  <h3>Teoría de nichos ecológicos: Joseph Grinnell (1877-1939)</h3>
+				  <div class="row" >
+				    <div class="column" style="width:50%">
+				      <figure>
+                <img src="img/grinnellpapertitle.png" alt="Grinell" style="border:none;background:none;box-shadow:none;margin: 0px 0px;">
+              </figure>
+				      <figure>
+                <img src="img/grinnellfoto.jpeg" alt="Grinell" style="border:none;background:none;box-shadow:none;margin: 0px 0px;">
+              </figure>              
+            </div>
+				    <div class="column" style="width:50%">
+				      <figure>
+                <img src="img/grinnellpapermap.png" alt="Grinnell" style="border:none;background:none;box-shadow:none;margin: 0px 0px;">
+              </figure>
+            </div>
+          </div>            
+        </section>                    
+				<section id="historia-nichos-02">
+				  <h3>Teoría de nichos ecológicos: <br> G. Evelyn Hutchinson (1903-1991)</h3>
+				  <div class="row" >
+				    <div class="column" style="width:50%">
+				      <figure>
+                <img src="img/hutchinsonfoto.jpg" alt="Hutchinson" style="border:none;background:none;box-shadow:none;margin: 0px 0px;">
+              </figure>
+            </div>
+				    <div class="column" style="width:50%">
+				      <figure>
+                <img src="img/hutchinson57.png" alt="Hutchinson" style="border:none;background:none;box-shadow:none;margin: 0px 0px;">
+              </figure>
+            </div>
+          </div>            
+        </section>                    
+				<section id="historia-nichos-03">
+				  <h3>Teoría de nichos ecológicos: Evelyn Hutchinson (1903-1991)</h3>
+				  <div class="row" >
+				    <div class="column" style="width:45%;text-align:left">
+				      <p><small>Hutchinson definió el nicho ecológico como la suma de todos los factores ambientales que actúan sobre un organismo.</small></p>
+				      <p></p>
+				      <figure>
+                <img src="img/nichofundamentalrealizado.jpg" alt="Hutchinson" style="border:none;background:none;box-shadow:none;margin: 0px 0px;">
+              </figure>
+            </div>
+            <div class="column" style="width:10%;text-align:left">
+              <p></p>
+            </div>
+				    <div class="column" style="width:45%;text-align:left">
+              <p><small>El nicho es una región en un espacio n-dimensional. Se definen dos nichos:</small></p>
+              <p><small><strong>Nicho fundamental:</strong> todos los aspectos del espacio n-dimensional en la ausencia de otras especies.</small></p>
+              <p><small><strong>Nicho realizado:</strong> la parte del nicho fundamental a la que la especie ha sido restringida debido a interacciones específicas.</small></p>
+            </div>
+          </div>            
+        </section>                    
+				<section id="espacio-ambiental-geografico">
+				  <h4>Relación entre los espacios geográfico y ambiental ("dualidad de Hutchinson")</h4>
+				    <figure>
+              <img src="img/espaciogeograficoambiental.png" alt="Espacios geográfico y ambiental" style="border:none;background:none;box-shadow:none;margin: 0px 0px;">
+            </figure>
+				</section> 						
+				<section id="componentes-modelado-nichos">
+				  <h3>Componentes del modelado de nichos ecológicos</h3>
+				    <figure>				    
+              <img src="img/componentes-modelado-nichos-02.png" alt="Componentes del modelado de nichos ecológicos" style="border:none;background:none;box-shadow:none;margin: 0px 0px;">
+            </figure>
+				</section> 				
+				<section id="datos-ambientales-01">
+				  <h3>Datos ambientales</h3>
+				    <figure>
+              <img src="img/datos-ambientales-escala.png" alt="Datos ambientales" style="border:none;background:none;box-shadow:none;margin: 0px 0px;">
+              <figcaption><small>Datos ambientales y escala<br><a href="https://www.dropbox.com/s/r0sax3koofikt8t/Semana3_Platica1_RelacionATeoria_final.pdf?dl=0">Imagen de Ángela Cuervo</a></small></figcaption>
+            </figure>
+				</section> 				
+				<section id="worldclim-01">
+				  <h3>Fuentes de datos ambientales: WorldClim</h3>
+				  <div class="row" >
+				    <div class="column" style="width:50%;text-align:left">
+				      <figure>
+                <img src="img/worldclimpaper01.png" alt="WorldClim" style="border:none;background:none;box-shadow:none;margin: 0px 0px;">
+              </figure>
+            </div>
+				    <div class="column" style="width:50%;text-align:left">
+				      <figure>
+                <img src="img/worldclimpaper02.png" alt="WorldClim" style="border:none;background:none;box-shadow:none;margin: 0px 0px;">
+              </figure>
+            </div>
+          </div>      
+				  <div class="row" >
+				    <figcaption><small><a href="http://www.worldclim.org/">WorldClim</a></small></figcaption>
+				  </div>                
+        </section> 
+				<section id="worldclim-02">
+				  <h3>Fuentes de datos ambientales: WorldClim</h3>
+		      <figure>
+            <img src="img/worldclim-variables.png" alt="WorldClim" style="border:none;background:none;box-shadow:none;margin: 0px 0px;">
+            <figcaption><small><a href="https://www.worldclim.org/data/bioclim.html">Variables bioclimáticas de WorldClim</a></small></figcaption>
+          </figure>
+        </section> 
+				<section id="datos-ambientales-otros">
+				  <h3>Fuentes de datos ambientales: otros</h3>
+				  <div style="text-align:left">
+				    <li><a href="http://chelsa-climate.org/">CHELSA: Climatologies at High Resolution for the Earth’s Land Surface Areas</a></li>
+				    <li><a href="https://datadryad.org/resource/doi:10.5061/dryad.s2v81">MERRAclim: high-resolution global dataset of remotely sensed bioclimatic variables for ecological modelling</a></li>
+				  </div>
+        </section> 
+				<section id="datos-presencia-01">
+				  <h3>Datos de presencia</h3>
+				  <div class="row" >
+				    <div class="column" style="width:50%">
+				      <figure>
+                <img src="img/coleccionhistorianatural.jpg" alt="Colección de historia natural" style="border:none;background:none;box-shadow:none;margin: 0px 0px;">
+                <figcaption><small>Colección de historia natural<br><a href="http://materialicious.com/2016/04/huge-secret-collections-of-the-national-museum-of-natural-history.html">Imagen de Materialicius</a></small></figcaption>
+              </figure>
+            </div>
+				    <div class="column" style="width:50%">
+				      <figure>
+                <img src="img/etiquetas.jpg" alt="Especies invasivas" style="border:none;background:none;box-shadow:none;margin: 0px 0px;">
+                <figcaption><small>Etiquetas de especímenes<br><a href="http://westerngroundparrothistory.blogspot.com/2015/08/">Imagen de Western Ground Parrot History</a></small></figcaption>
+              </figure>
+            </div>
+          </div>            
+				</section>							
+				<section id="datos-presencia-02">
+				  <h3>Datos de presencia</h3>
+				  <div class="row" >
+				    <div class="column" style="width:50%">
+				      <figure>
+                <img src="img/cienciaciudadana.jpg" alt="Ciencia ciudadana" style="border:none;background:none;box-shadow:none;margin: 0px 0px;">
+                <figcaption><small>Ciencia ciudadana<br><a href="https://www.globalchange.gov/about/highlights/2016-crowdsourcing-climate-citizen-science-and-the-national-climate-assessment">Imagen de GlobalChange.gov</a></small></figcaption>
+              </figure>
+            </div>
+				    <div class="column" style="width:50%">
+				      <figure>
+                <img src="img/observadoresaves.jpg" alt="Observación de aves" style="border:none;background:none;box-shadow:none;margin: 0px 0px;">
+                <figcaption><small>Observación de aves<br><a href="https://www.macleans.ca/society/life/the-flocking-instinct/">Imagen de Maclean's</a></small></figcaption>
+              </figure>
+            </div>
+          </div>            
+				</section>							
+				<section id="datos-presencia-03">
+				  <h3>Datos de presencia</h3>
+				  <div style="text-align:left">
+				    <li>Son registros acerca de la presencia de un <strong>taxón</strong> (ej. una especie) que incluyen su <strong>localización</strong> (idealmente con coordenadas), su <strong>temporalidad</strong> (ej. año, fecha) y otros elementos adicionales (ej. taxonomía superior, recolector, identificador).</li>
+				    <li>Se prefieren los <strong>datos primarios</strong> (i.e. sin agregar o interpretar).</li>
+				    <li>Sus elementos (i.e. campos, columnas) están estandarizados a través del <a href="https://github.com/tdwg/dwc">Darwin Core</a>.</li>
+				  </div>
+        </section> 				
+				<section id="gbif">
+				  <h3>Fuentes de datos de presencia: GBIF</h3>
+				    <figure>
+              <img src="img/gbif-sitio.png" alt="Sitio web de GBIF" style="border:none;background:none;box-shadow:none;margin: 0px 0px;">
+              <figcaption><small><a href="http://www.gbif.org">Sitio web de GBIF</a> (2023)</small></figcaption>
+            </figure>
+				</section>
+				<section id="gbif-interfaz">
+				  <h3>Interfaz de GBIF</h3>
+				    <figure>
+              <img src="img/gbif-interfaz.png" alt="Interfaz del sitio web de GBIF" style="border:none;background:none;box-shadow:none;margin: 0px 0px;">
+              <figcaption><small><a href="https://www.gbif.org/occurrence/map?country=CR&has_coordinate=true&has_geospatial_issue=false&taxon_key=212&year=2000,2018">Interfaz del sitio web de GBIF</a></small></figcaption>
+            </figure>
+				</section>			
+				<section id="gbif-api">
+				  <h3>API de GBIF</h3>
+				    <figure>
+              <img src="img/gbif-api.png" alt="API de GBIF" style="border:none;background:none;box-shadow:none;margin: 0px 0px;">
+              <figcaption><small><a href="https://www.gbif.org/developer/summary">API de GBIF</a></small></figcaption>
+            </figure>
+				</section>			
+				<section id="datos-presencia-otros">
+				  <h3>Fuentes de datos de presencia: otros</h3>
+				  <div style="text-align:left">
+				    <li><a href="https://ebird.org">eBird</a></li>
+				    <li><a href="http://vertnet.org/">VertNet</a></li>
+				    <li><a href="https://www.inaturalist.org">iNaturalist</a></li>
+				    <!-- <li><a href="https://atta.inbio.ac.cr">Atta (INBio)</a></li> -->
+				  </div>
+        </section> 
+				<section id="algoritmos-01">
+				  <h3>Algoritmos</h3>
+				  <div style="text-align:left">
+				    <li>Relacionan los datos ambientales y de presencia.</li>
+				    <li>Utilizan varios enfoques:</li>
+				    <ul>
+				      <li>Regresión.</li>
+				      <li>Inteligencia artificial (ej. algoritmos genéticos, redes neuronales artificiales).</li>
+				      <li>Entropía máxima.</li>
+				    </ul>
+				  </div>
+        </section> 				        
+				<section id="maxent01">
+				  <h3>Maxent</h3>
+				  <div class="row" >
+				    <div class="column" style="width:50%;text-align:left">
+				      <figure>
+                <img src="img/maxentpaper01.png" alt="WorldClim" style="border:none;background:none;box-shadow:none;margin: 0px 0px;">
+              </figure>
+            </div>
+				    <div class="column" style="width:50%;text-align:left">
+				      <figure>
+                <img src="img/maxentpaper02.png" alt="WorldClim" style="border:none;background:none;box-shadow:none;margin: 0px 0px;">
+              </figure>
+            </div>
+          </div>      
+				  <div class="row" >
+				    <figcaption><small><a href="https://biodiversityinformatics.amnh.org/open_source/maxent/">Maxent</a></small></figcaption>
+				  </div>                         
+        </section> 				                
+				<section id="maxent02">
+				  <h3>Maxent</h3>
+				  <div class="row" >
+				    <figure>
+              <img src="img/maxent-impacto.png" alt="WorldClim" height="500" style="border:none;background:none;box-shadow:none;margin: 0px 0px;">
+              <figcaption><small>Impacto de Maxent<br><a href="https://www.youtube.com/watch?v=0FpZpmyRD7I&feature=youtu.be">Imagen de Townsend Peterson</a></small></figcaption>              
+            </figure>
+        </section> 				                
+				<section id="maxent03">
+				  <h3>Recursos sobre Maxent</h3>
+				  <div style="text-align:left">
+				    <li><a href="https://biodiversityinformatics.amnh.org/open_source/maxent/">"Maxent software for modelling species niches and distributions" (página principal)</a></li>
+				    <li><a href="https://biodiversityinformatics.amnh.org/open_source/maxent/Maxent_tutorial2017.pdf">Tutorial oficial (en inglés)</a></li>
+				    <li><a href="https://drive.google.com/drive/folders/1U8DWXhjpt5K7QbU1dv8_D2R7uQgK0Koy?usp=sharing">Tutorial de taller del Minae (en español)</a></li>
+				  </div>
+        </section> 				                
+				<section id="algoritmos-02">
+				  <h3>Otras herramientas</h3>
+				  <div style="text-align:left">
+				    <li><a href="http://openmodeller.sourceforge.net/">openModeller</a></li>
+				    <li><a href="https://wallaceecomod.github.io/">Wallace</a></li>
+				    <li><a href="https://cran.r-project.org/web/packages/dismo/index.html">dismo</a></li>
+				  </div>
+        </section> 		
+				<section id="ejercicios">
+				  <h3>Ejercicio</h3>
+				  <div style="text-align:left">
+				    <li>Descargue de <a href="https://www.gbif.org/">GBIF</a> los registros de presencia de <a href="https://es.wikipedia.org/wiki/Pharomachrus_mocinno"><em>Pharomachrus mocinno</em> (quetzal)</a> en Costa Rica.</li>
+						<li>Genere un modelo de distribución mediante Maxent, utilizando las capas ambientales de WorldClim.</li>
+						<li>Puede utilizar la guía y las capas recortadas para Costa Rica disponibles en este <a href="https://drive.google.com/drive/folders/1U8DWXhjpt5K7QbU1dv8_D2R7uQgK0Koy?usp=sharing">tutorial</a>.</li>
+				  </div>
+        </section> 				                        
+					
+			</div>
+		</div>
+		
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+			  history: true,	
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
